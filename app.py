@@ -5,10 +5,10 @@ import time
 from dotenv import load_dotenv
 
 load_dotenv()
-os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY")
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["ANTHROPIC_API_KEY"] = os.getenv("ANTHROPIC_API_KEY")
-
+for key in ["GEMINI_API_KEY", "GROQ_API_KEY", "ANTHROPIC_API_KEY"]:
+    val = os.getenv(key) or st.secrets.get(key, "")
+    if val:
+        os.environ[key] = val
 SYSTEM = "You are an expert options and swing trader. Analyze the trade idea concisely - give direction, key risks, and a yes/no recommendation."
 
 st.title("AI Consensus Hub")
