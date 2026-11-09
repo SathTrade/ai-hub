@@ -17,7 +17,7 @@ query = st.text_area("Enter your question or trade idea:")
 def ask_ai(model, query):
     for attempt in range(3):
         try:
-            r = litellm.completion(model=model, messages=[{"role": "system", "content": SYSTEM}, {"role": "user", "content": query}])
+            r = litellm.completion(model=model, max_tokens=500, messages=[{"role": "system", "content": SYSTEM}, {"role": "user", "content": query}])
             return r.choices[0].message.content
         except Exception as e:
             if attempt < 2:
