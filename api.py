@@ -22,8 +22,8 @@ def ask_ai(model, query):
 
 @app.get("/ask")
 def ask(q: str):
-    gemini = ask_ai("gemini/gemini-3.5-flash-lite", q)
-    groq = ask_ai("groq/qwen/qwen3.8-27b", q)
+    gemini = ask_ai("gemini/gemini-1.5-flash", q)
+    groq = ask_ai("groq/llama3-8b-8192", q)
     claude_prompt = f"Question: {q}\nGemini: {gemini}\nGroq: {groq}\nGive your final verdict in 3 sentences."
     claude = ask_ai("anthropic/claude-haiku-4-5", claude_prompt)
     return {"gemini": gemini, "groq": groq, "claude": claude}
