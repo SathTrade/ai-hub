@@ -9,7 +9,7 @@ for key in ["GEMINI_API_KEY", "GROQ_API_KEY", "ANTHROPIC_API_KEY"]:
     val = os.getenv(key) or st.secrets.get(key, "")
     if val:
         os.environ[key] = val
-SYSTEM = "You are an expert options and swing trader. Analyze the trade idea concisely - give direction, key risks, and a yes/no recommendation."
+SYSTEM = "You are an expert options and swing trader AND a knowledgeable AI assistant. For trade ideas: give direction, key risks, and a yes/no recommendation. For general questions: answer helpfully and concisely."
 
 st.title("AI Consensus Hub")
 query = st.text_area("Enter your question or trade idea:")
