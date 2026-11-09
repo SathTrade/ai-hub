@@ -30,11 +30,11 @@ if st.button("Ask All AIs"):
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("Gemini")
-            gemini_response = ask_ai("gemini/gemini-2.5-flash-lite", query)
+            gemini_response = ask_ai("gemini/gemini-3.5-flash-lite", query)
             st.write(gemini_response)
         with col2:
             st.subheader("Groq")
-            groq_response = ask_ai("groq/llama-3.1-8b-instant", query)
+            groq_response = ask_ai("groq/llama3-8b-8192", query)
             st.write(groq_response)
         st.subheader("Claude - Final Verdict")
         claude_prompt = f"Trade: {query}\nGemini: {gemini_response}\nGroq: {groq_response}\nChallenge both. Give YES or NO verdict in 3 sentences."
