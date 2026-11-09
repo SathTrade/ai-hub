@@ -34,7 +34,7 @@ if st.button("Ask All AIs"):
             st.write(gemini_response)
         with col2:
             st.subheader("Groq")
-            groq_response = ask_ai("groq/llama3-8b-8192", query)
+            groq_response = ask_ai("groq/llama-3.3-70b-versatile", query)
             st.write(groq_response)
         st.subheader("Claude - Final Verdict")
         claude_prompt = f"Trade: {query}\nGemini: {gemini_response}\nGroq: {groq_response}\nChallenge both. Give YES or NO verdict in 3 sentences."
