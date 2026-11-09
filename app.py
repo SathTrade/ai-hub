@@ -30,14 +30,14 @@ if st.button("Ask All AIs"):
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("Gemini")
-            gemini_response = ask_ai("gemini/gemini-2.0-flash-lite", query)
+            gemini_response = ask_ai("gemini/gemini-2.5-flash-lite", query)
             st.write(gemini_response)
         with col2:
             st.subheader("Groq")
-            groq_response = ask_ai("groq/qwen/qwen3-8b", query)
+            groq_response = ask_ai("groq/llama-3.1-8b-instant", query)
             st.write(groq_response)
         st.subheader("Claude - Final Verdict")
         claude_prompt = f"Trade: {query}\nGemini: {gemini_response}\nGroq: {groq_response}\nChallenge both. Give YES or NO verdict in 3 sentences."
-        st.write(ask_ai("anthropic/claude-3-haiku-20240307", claude_prompt))
+        st.write(ask_ai("anthropic/claude-haiku-4-5", claude_prompt))
         st.subheader("Consensus")
         st.info("2 out of 3 AIs must agree to confirm the trade.")
