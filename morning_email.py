@@ -1,4 +1,4 @@
-import urllib.request, json, smtplib, os
+import urllib.request, json, smtplib, os, time
 from email.mime.text import MIMEText
 from datetime import datetime
 import pytz
@@ -6,10 +6,24 @@ import pytz
 et = pytz.timezone('America/Toronto')
 date_str = datetime.now(et).strftime('%A %b %d, %Y')
 
-url = "https://ai-hub-d0ji.onrender.com/ask?q=What+is+today%27s+market+outlook+for+SPY+QQQ+NVDA%3F+Any+key+catalysts+today%3F+Bullish+or+bearish%3F+Key+levels+to+watch."
+RENDER_URL = "https://ai-hub-d0ji.onrender.com/ask?q=What+is+today%27s+market+outlook+for+SPY+QQQ+NVDA%3F+Any+key+catalysts+today%3F+Bullish+or+bearish%3F+Key+levels+to+watch."
+
+def call_render(max_attempts=3, timeout=90):
+    """Call Render API with retries — handles cold-start spin-up delay."""
+    for attempt in range(max_attempts):
+        try:
+            with urllib.request.urlopen(RENDER_URL, timeout=timeout) as r:
+                return json.loads(r.read())
+        except Exception as e:
+            if attempt < max_attempts - 1:
+                wait = 30 * (attempt + 1)  # 30s, 60s
+                print(f"Attempt {attempt+1} failed ({e}), retrying in {wait}s...")
+                time.sleep(wait)
+            else:
+                raise
+
 try:
-    with urllib.request.urlopen(url, timeout=60) as r:
-        data = json.loads(r.read())
+    data = call_render()
     gemini  = data.get("gemini", "No response")
     groq    = data.get("groq",   "No response")
     verdict = data.get("claude", "No response")
