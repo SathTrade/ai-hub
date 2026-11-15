@@ -1,9 +1,11 @@
 name: Morning AI Market Outlook
 
 on:
-  schedule:
-    - cron: '50 12 * * 1-5'   # 8:00 AM ET (EST)
-    - cron: '50 11 * * 1-5'   # 8:00 AM ET (EDT)
+  # Scheduled emails merged into trading-bot daily email (email_alert.py + litellm).
+  # Crons disabled — keep workflow_dispatch for manual testing of Render endpoint.
+  # schedule:
+  #   - cron: '50 12 * * 1-5'   # 8:00 AM ET (EST)
+  #   - cron: '50 11 * * 1-5'   # 8:00 AM ET (EDT)
   workflow_dispatch:
 
 jobs:
