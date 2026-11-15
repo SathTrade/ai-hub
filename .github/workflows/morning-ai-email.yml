@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '50 12 * * 1-5'   # 8:00 AM ET (EST)
     - cron: '50 11 * * 1-5'   # 8:00 AM ET (EDT)
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 jobs:
   send-outlook:
@@ -62,3 +62,4 @@ FINAL VERDICT (Claude):
               s.send_message(msg)
           print("Email sent!")
           EOF
+
